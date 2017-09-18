@@ -2,9 +2,47 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Helo World</title>
+    <title>Check Lunch</title>
   </head>
-  <body>
-    <h1>hello world, this is a start page</h1>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+  <script>
+  var app = angular.module('lunchApp', []);
+  app.controller('lunchAppCtrl', function($scope) {
+      $scope.items = '';
+      $scope.message = '';
+      $scope.checkGood = false;
+      $scope.empty = false;
+      $scope.emptyMsg = "Please enter data first";
+
+      $scope.checkLunch = function() {
+
+          if ($scope.items && $scope.items.length > 0) {
+             $scope.checkGood = true;
+             $scope.empty = false;
+             var itemsArray = $scope.items.split(',');
+
+             if (itemsArray.length <= 3) {
+                $scope.message = 'Enjoy!';
+              } else {
+                $scope.message = 'Too much!';
+              }
+
+          } else {
+            $scope.checkGood = false;
+            $scope.empty = true;
+          }
+      };
+  });
+  </script>
+
+  <body ng-app="lunchApp" ng-controller="lunchAppCtrl">
+    <div>
+      <input ng-model= "items">
+    </div>
+    <div>
+      <button ng-click = "checkLunch()">check if too much</button>
+    </div>
+    <div ng-show="checkGood">{{message}}</div>
+    <div ng-show="empty" >{{emptyMsg}}</div>
   </body>
 </html>
