@@ -1,48 +1,39 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Check Lunch</title>
+    <title>Lunch Checker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <style>
+      .message { font-size: 1.3em; font-weight: bold; }
+      .success {
+         color: green;
+      }
+      .empty {
+        color: red;
+      }
+    </style>
   </head>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
-  <script>
-  var app = angular.module('lunchApp', []);
-  app.controller('lunchAppCtrl', function($scope) {
-      $scope.items = '';
-      $scope.message = '';
-      $scope.checkGood = false;
-      $scope.empty = false;
-      $scope.emptyMsg = "Please enter data first";
+<body ng-app="LunchCheck" ng-controller="LunchCheckController">
+   <div class="container">
+     <h1>Lunch Checker</h1>
 
-      $scope.checkLunch = function() {
-
-          if ($scope.items && $scope.items.length > 0) {
-             $scope.checkGood = true;
-             $scope.empty = false;
-             var itemsArray = $scope.items.split(',');
-
-             if (itemsArray.length <= 3) {
-                $scope.message = 'Enjoy!';
-              } else {
-                $scope.message = 'Too much!';
-              }
-
-          } else {
-            $scope.checkGood = false;
-            $scope.empty = true;
-          }
-      };
-  });
-  </script>
-
-  <body ng-app="lunchApp" ng-controller="lunchAppCtrl">
-    <div>
-      <input ng-model= "items">
-    </div>
-    <div>
-      <button ng-click = "checkLunch()">check if too much</button>
-    </div>
-    <div ng-show="checkGood">{{message}}</div>
-    <div ng-show="empty" >{{emptyMsg}}</div>
-  </body>
+         <div class="form-group">
+             <input id="lunch-menu" type="text"
+             placeholder="list comma separated dishes you usually have for lunch"
+             class="form-control"
+             ng-model= "items">
+         </div>
+         <div class="form-group">
+             <button ng-click = "checkLunch()" class="btn btn-default">Check If Too Much</button>
+         </div>
+         <div class="form-group message">
+           <!-- Your message can go here. -->
+           <div class="success" ng-show="checkGood">{{message}}</div>
+           <div class="empty" ng-show="empty" >{{emptyMsg}}</div>
+         </div>
+   </div>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js"></script>
+   <script src="app.js"></script>
+</body>
 </html>
