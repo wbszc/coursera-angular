@@ -59,6 +59,7 @@
                 method: "GET",
                 url: (ApiBasePath + "/menu_items.json")
             }).then(function(response) {
+               console.log(response);
                 var foundItems = [];
 
                 for (var i = 0; i < response.data['menu_items'].length; i++) {
