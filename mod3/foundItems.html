@@ -1,14 +1,19 @@
-<div class="row">
-    <div ng-repeat="item in menu.foundItems">
-        <div class="clearfix" ng-if="$index % 2 == 0"></div>
-        <div class="col-md-6">
-            <div class="jumbotron">
-                <h2>{{item.name}}</h2>
-                <h3>{{item.short_name}}</h3>
-                <p>{{item.description}}</p>
-                <input type="button" ng-click="menu.onRemove({index: $index})" class="btn btn-lg btn-primary" value="Don't want this one!">
-            </div>
-        </div>
-    </div>
-</div>
+<table class="table" ng-if="menu.foundItems.length">
+  <tr>
+    <th>Name</td>
+    <th>Short Name</td>
+    <th>Description</td>
+    <th></td>
+  </tr>
+  <tr ng-repeat="item in menu.foundItems">
+    <td>{{item.name}}</td>
+    <td>{{item.short_name}}</td>
+    <td>{{item.description}}</td>
+    <td>
+      <button class="btn btn-default" ng-click="menu.onRemove({index: $index})">
+        Don't want this one!
+      </button>
+    </td>
+  </tr>
+</table>
 <div class="alert alert-danger" role="alert" ng-show="menu.onEmpty">{{menu.onEmpty}}</div>
